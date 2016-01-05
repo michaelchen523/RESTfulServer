@@ -15,9 +15,9 @@ module.exports = function(grunt) {
         yuidoc: {
             compile: {
                 name: 'Grunt test',
-                description: 'Part Two ',
+                description: 'RESTful Server ',
                 version: '1',
-                url: 'b-line.com',
+                url: 'michaelchen523.github.io',
                 options: {
                     paths: './src',
                     //themedir: 'path/to/custom/theme/',

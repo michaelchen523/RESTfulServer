@@ -1,7 +1,6 @@
 /**
  * Defines the methods of a "thing"
  * @author Michael Chen
- * @type {*|exports|module.exports}
  * @class thing-dao
  *
  */

@@ -1,9 +1,9 @@
 {
     "project": {
         "name": "Grunt test",
-        "description": "Part Two ",
+        "description": "RESTful Server ",
         "version": "1",
-        "url": "b-line.com"
+        "url": "michaelchen523.github.io"
     },
     "files": {
         "src/dao/thing-dao.js": {
@@ -11,6 +11,15 @@
             "modules": {},
             "classes": {
                 "thing-dao": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/lib/schema.js": {
+            "name": "src/lib/schema.js",
+            "modules": {},
+            "classes": {
+                "schema": 1
             },
             "fors": {},
             "namespaces": {}
@@ -38,8 +47,20 @@
             "file": "src/dao/thing-dao.js",
             "line": 1,
             "description": "Defines the methods of a \"thing\"",
-            "author": "Michael Chen",
-            "type": "{*|exports|module.exports}"
+            "author": "Michael Chen"
+        },
+        "schema": {
+            "name": "schema",
+            "shortname": "schema",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/lib/schema.js",
+            "line": 1,
+            "description": "Defines the schema that is considered valid",
+            "author": "Michael Chen"
         },
         "server": {
             "name": "server",
@@ -58,7 +79,7 @@
     "classitems": [
         {
             "file": "src/dao/thing-dao.js",
-            "line": 18,
+            "line": 17,
             "description": "Gets the Object by it's id (not the native \"_id\")",
             "itemtype": "method",
             "name": "getStuffById",
@@ -76,7 +97,7 @@
         },
         {
             "file": "src/dao/thing-dao.js",
-            "line": 44,
+            "line": 42,
             "description": "Inserts something into the database after validation",
             "itemtype": "method",
             "name": "insertStuff",
@@ -94,7 +115,7 @@
         },
         {
             "file": "src/dao/thing-dao.js",
-            "line": 69,
+            "line": 72,
             "description": "Updates an existing object, throws an error otherwise",
             "itemtype": "method",
             "name": "updateStuff",
@@ -112,7 +133,7 @@
         },
         {
             "file": "src/dao/thing-dao.js",
-            "line": 98,
+            "line": 99,
             "description": "Deletes a thing(Object) in the database",
             "itemtype": "method",
             "name": "deleteStuff",
@@ -130,7 +151,7 @@
         },
         {
             "file": "src/dao/thing-dao.js",
-            "line": 121,
+            "line": 120,
             "description": "Validates the object with the specified schema (schema.js)",
             "itemtype": "method",
             "name": "validateStuff",
@@ -180,20 +201,17 @@
         },
         {
             "file": "src/server.js",
-            "line": 111,
+            "line": 110,
             "description": "Removes something from the database.\nAll error handling and validation handled in DAO",
             "itemtype": "method",
             "name": "DELETE",
-            "uses": [
-                "deleteStuff from things-dao"
-            ],
             "class": "server"
         }
     ],
     "warnings": [
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/dao/thing-dao.js:121"
+            "line": " src/dao/thing-dao.js:120"
         }
     ]
 }

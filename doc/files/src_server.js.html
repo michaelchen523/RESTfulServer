@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/schema.html">schema</a></li>
                                 <li><a href="../classes/server.html">server</a></li>
                                 <li><a href="../classes/thing-dao.html">thing-dao</a></li>
                             </ul>
@@ -144,11 +145,11 @@ server.route({
             var data = JSON.parse(req.payload);
             var id = data.id;
             if (_.isString(id)) {
-                things.insertStuff(data, function (err, reply) {
+                things.insertStuff(data, function (err, res) {
                     if(err) {
                         dbReply(err);
                     } else {
-                        dbReply(reply);
+                        dbReply(res);
                     }
                 });
             } else {
@@ -172,7 +173,6 @@ server.route({
         handler: function(req, dbReply) {
             var data = JSON.parse(req.payload);
             var id = data.id;
-            console.log(&#x27;id &#x27; + id);
             if(_.isString(id)) {
                 things.updateStuff(data, function(err, reply) {
                     if(err) {
@@ -194,7 +194,6 @@ server.route({
  * Removes something from the database.
  * All error handling and validation handled in DAO
  * @method DELETE
- * @uses deleteStuff from things-dao
  */
 server.route({
     method: &#x27;DELETE&#x27;,
@@ -202,7 +201,6 @@ server.route({
     handler: function(req, dbReply) {
 
         var id = req.params.id; //not _id
-        console.log(id);
         if(_.isString(id)) {
             things.deleteStuff(id, function(err, reply) {
                 if(err) {

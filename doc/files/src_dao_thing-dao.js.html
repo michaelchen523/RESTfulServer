@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/schema.html">schema</a></li>
                                 <li><a href="../classes/server.html">server</a></li>
                                 <li><a href="../classes/thing-dao.html">thing-dao</a></li>
                             </ul>
@@ -83,7 +84,6 @@
 /**
  * Defines the methods of a &quot;thing&quot;
  * @author Michael Chen
- * @type {*|exports|module.exports}
  * @class thing-dao
  *
  */
@@ -95,7 +95,7 @@ var jjv = require(&#x27;jjv&#x27;);
 var schema = require(&#x27;../lib/schema&#x27;);
 var validator = jjv();
 
-validator.addSchema(&#x27;id&#x27;, schema); //schema is in schema.js
+validator.addSchema(&#x27;thing&#x27;, schema); //schema is in schema.js
 
 /**
  * Gets the Object by it&#x27;s id (not the native &quot;_id&quot;)
@@ -106,12 +106,11 @@ validator.addSchema(&#x27;id&#x27;, schema); //schema is in schema.js
 exports.getThingById = function(id, cb) {
     var collection = database.get(conf.collections.things);
     collection.find({&#x27;id&#x27;: id}, function (err, res) {
-        console.log(&#x27;err: &#x27; + err);
         if(err) {
+            console.log(err);
             cb(err, null);
         } else {
             var obj = res[0];
-            console.log(obj);
             if(obj !== undefined) {
                 var updated = _.omit(obj, &quot;_id&quot;);
                 cb(null, [updated]); //it&#x27;s an array without the native &quot;_id&quot; property
@@ -130,21 +129,26 @@ exports.getThingById = function(id, cb) {
  * @param cb Standard callback function (err,reply)
  */
 exports.insertStuff = function(thing, cb) {
-    console.log(thing);
-    var vld = validateStuff(thing, true);
+    var vld = validateStuff(thing);
     if(vld.valid) {
         var collection = database.get(conf.collections.things);
-        collection.insert(thing, function(err, reply) {
-            if(err) {
-                cb({409: &quot;Database Error&quot;}, null);
+        collection.findOne({&#x27;id&#x27;: thing.id}, function (err, res) {
+            if (res !== null) {
+                cb({&quot;status&quot;: 409, &quot;err&quot;: &quot;Already in database&quot;}, null);
             } else {
-                reply = [_.omit(reply, &#x27;_id&#x27;)];
-                cb(null, reply);
+                collection.insert(thing, function (err, reply) {
+                    if (err) {
+                        cb({&quot;Status&quot;: 409, &quot;err&quot;: &quot;Database Error&quot;}, null);
+                    } else {
+                        reply = [_.omit(reply, &#x27;_id&#x27;)];
+                        cb(null, reply);
+                    }
+                });
             }
-
         });
+
     }
-    else cb({400 : &quot;Not valid: Bad request&quot;}, null);
+    else cb({&#x27;status&#x27;: 400, &quot;message&quot; : &quot;Not valid: Bad request&quot;}, null);
 
 };
 
@@ -156,10 +160,8 @@ exports.insertStuff = function(thing, cb) {
  */
 exports.updateStuff = function(thing, cb) {
     var vald = validateStuff(thing, false);
-    console.log(thing.id);
 
     if(vald.valid) {
-        console.log(vald.valid);
         var collection = database.get(conf.collections.things);
         collection.update({id: thing.id}, thing, function(err, reply) {
             if(err) {
@@ -186,15 +188,13 @@ exports.updateStuff = function(thing, cb) {
 exports.deleteStuff = function(id, cb) {
     var collection = database.get(conf.collections.things);
     collection.remove({&#x27;id&#x27;: id}, function(err, reply) {
-        console.log(&#x27;err: &#x27; + err);
-        console.log(&#x27;reply: &#x27; + reply);
         if(err) {
             cb(err, null);
         }
         if(reply &lt; 1) {
             cb({404: &quot;Object not found&quot;}, null);
         } else {
-            cb(null, {204: &quot;Content deleted successfully&quot;});
+            cb(null, {&quot;status&quot; : 204, &quot;message&quot; : &quot;Content deleted successfully&quot;});
         }
     });
 };
@@ -207,7 +207,11 @@ exports.deleteStuff = function(id, cb) {
  * @returns {{valid: boolean}} If the object is valid or not
  */
 var validateStuff = function (thing) {
-    var errors = validator.validate(&quot;id&quot;, thing);
+    console.log(&quot;---&quot; + thing);
+    console.log(&quot;++ &quot; + JSON.stringify(thing));
+    var errors = validator.validate(&quot;thing&quot;, thing);
+    console.log(&#x27;errors &#x27; + errors);
+    console.log(&#x27;string errors &#x27; + JSON.stringify(errors));
     if (!errors) {
         return {&#x27;valid&#x27;: true};
     } else {
