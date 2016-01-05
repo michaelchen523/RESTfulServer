@@ -1,0 +1,13 @@
+<html>
+<head>
+    <link rel = 'stylesheet' href ="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+    <script src = '../bin/www.js'></script>
+    <script id = t>
+        var t = _.template('hello {{port}}');
+        console.log(t(require('../src/conf/hapi-conf')));
+    </script>
+
+    <title>{{port}}</title>
+    <p>t.templateSettings</p>
+</head>
+</html>

@@ -1,0 +1,199 @@
+{
+    "project": {
+        "name": "Grunt test",
+        "description": "Part Two ",
+        "version": "1",
+        "url": "b-line.com"
+    },
+    "files": {
+        "src/dao/thing-dao.js": {
+            "name": "src/dao/thing-dao.js",
+            "modules": {},
+            "classes": {
+                "thing-dao": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/server.js": {
+            "name": "src/server.js",
+            "modules": {},
+            "classes": {
+                "server": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "thing-dao": {
+            "name": "thing-dao",
+            "shortname": "thing-dao",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/dao/thing-dao.js",
+            "line": 1,
+            "description": "Defines the methods of a \"thing\"",
+            "author": "Michael Chen",
+            "type": "{*|exports|module.exports}"
+        },
+        "server": {
+            "name": "server",
+            "shortname": "server",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/server.js",
+            "line": 1,
+            "description": "Describes the functionality of a basic server",
+            "author": "Michael Chen"
+        }
+    },
+    "classitems": [
+        {
+            "file": "src/dao/thing-dao.js",
+            "line": 18,
+            "description": "Gets the Object by it's id (not the native \"_id\")",
+            "itemtype": "method",
+            "name": "getStuffById",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "The string that represents the id attribute."
+                },
+                {
+                    "name": "cb",
+                    "description": "Callback that returns an error and result."
+                }
+            ],
+            "class": "thing-dao"
+        },
+        {
+            "file": "src/dao/thing-dao.js",
+            "line": 44,
+            "description": "Inserts something into the database after validation",
+            "itemtype": "method",
+            "name": "insertStuff",
+            "params": [
+                {
+                    "name": "thing",
+                    "description": "An object that is being inserted"
+                },
+                {
+                    "name": "cb",
+                    "description": "Standard callback function (err,reply)"
+                }
+            ],
+            "class": "thing-dao"
+        },
+        {
+            "file": "src/dao/thing-dao.js",
+            "line": 69,
+            "description": "Updates an existing object, throws an error otherwise",
+            "itemtype": "method",
+            "name": "updateStuff",
+            "params": [
+                {
+                    "name": "thing",
+                    "description": "The thing(object) that is getting updated"
+                },
+                {
+                    "name": "cb",
+                    "description": "standard callback function (err, reply)"
+                }
+            ],
+            "class": "thing-dao"
+        },
+        {
+            "file": "src/dao/thing-dao.js",
+            "line": 98,
+            "description": "Deletes a thing(Object) in the database",
+            "itemtype": "method",
+            "name": "deleteStuff",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "The id of the object that is getting deleted (not native _id)"
+                },
+                {
+                    "name": "cb",
+                    "description": "Standard callback function (err, reply)"
+                }
+            ],
+            "class": "thing-dao"
+        },
+        {
+            "file": "src/dao/thing-dao.js",
+            "line": 121,
+            "description": "Validates the object with the specified schema (schema.js)",
+            "itemtype": "method",
+            "name": "validateStuff",
+            "params": [
+                {
+                    "name": "thing",
+                    "description": "The thing(Object) that is being validated"
+                }
+            ],
+            "return": {
+                "description": "} If the object is valid or not",
+                "type": "Valid: boolean"
+            },
+            "class": "thing-dao"
+        },
+        {
+            "file": "src/server.js",
+            "line": 14,
+            "description": "Starts the server using the name and port from the hapi-config file(conf)",
+            "itemtype": "method",
+            "name": "start",
+            "class": "server"
+        },
+        {
+            "file": "src/server.js",
+            "line": 23,
+            "description": "Tells the server to get a thing from the database.\nAll validation and error handling occurs in DAO",
+            "itemtype": "method",
+            "name": "GET",
+            "class": "server"
+        },
+        {
+            "file": "src/server.js",
+            "line": 52,
+            "description": "Tells the server to post a thing into the database.\nAll validation and error handling occurs in the DAO",
+            "itemtype": "method",
+            "name": "POST",
+            "class": "server"
+        },
+        {
+            "file": "src/server.js",
+            "line": 81,
+            "description": "Updates something that is already in the database.\nAll error handling and validation handled by the DAO",
+            "itemtype": "method",
+            "name": "PUT",
+            "class": "server"
+        },
+        {
+            "file": "src/server.js",
+            "line": 111,
+            "description": "Removes something from the database.\nAll error handling and validation handled in DAO",
+            "itemtype": "method",
+            "name": "DELETE",
+            "uses": [
+                "deleteStuff from things-dao"
+            ],
+            "class": "server"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/dao/thing-dao.js:121"
+        }
+    ]
+}

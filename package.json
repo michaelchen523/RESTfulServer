@@ -1,0 +1,26 @@
+{
+  "name": "parttwo",
+  "version": "1.0.0",
+  "description": "Tutorial for Part Two of training for B-Line.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael Chen",
+  "license": "ISC",
+  "dependencies": {
+    "amdefine": "^1.0.0",
+    "chai": "^3.2.0",
+    "good": "^6.3.0",
+    "good-console": "^5.0.2",
+    "grunt": "^0.4.5",
+    "grunt-contrib-yuidoc": "^0.9.0",
+    "hapi": "^8.8.0",
+    "jjv": "^1.0.2",
+    "mocha": "^2.2.5",
+    "monk": "^1.0.1",
+    "shortid": "^2.2.2",
+    "should": "^7.0.2",
+    "superagent": "^1.2.0"
+  }
+}
