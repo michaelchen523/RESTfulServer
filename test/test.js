@@ -1,3 +1,7 @@
+/**
+ * @author Michael Chen
+ */
+
 var superagent = require('superagent');
 var chai = require('chai');
 var expect = chai.expect;
