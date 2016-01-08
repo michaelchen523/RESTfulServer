@@ -43,7 +43,7 @@ server.route({
             });
         }
         else {
-            dbReply("no ID provided");
+            reply("no ID provided");
         }
     }
 });
